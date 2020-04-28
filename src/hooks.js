@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 
 export const useAnimatedScale = (scGap, delay) => {
     const [scale, setScale] = useState(0)
-    const [animted, setAnimated] = useState(false)
+    const [animated, setAnimated] = useState(false)
     return {
         scale,
         start() {
@@ -17,7 +17,7 @@ export const useAnimatedScale = (scGap, delay) => {
                         setAnimated(false)
                         clearInterval(interval)
                     }
-                }. delay)
+                }, delay)
             }
         }
     }
