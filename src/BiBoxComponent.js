@@ -6,12 +6,12 @@ const lines = 3
 const boxes = 2
 
 const getUpdatedY = (h, scale) => {
-    return (h / yFactor) * scale
+    return (h / yFactor) * Math.sin(scale * Math.PI)
 }
 
 const getSize = (w, h) => Math.min(w, h) / boxSizeFactor
-
-const boxStyle = (i, y, w, h, scale) => {
+=
+const boxStyle = (i, w, h, scale) => {
     const size = getSize(w, h)
     const width = `${size}px`
     const height = `${size}px`
@@ -36,3 +36,36 @@ const lineStyle = (i, w, h, scale) => {
     const height = `${upH}px`
     return {left, top, position, background, width, height}
 }
+
+const Line = ({w, h, i, scale}) => {
+    return (<div style = {lineStyle(i, w, h, scale)}></div>)
+}
+
+const Box = ({i, w, h, scale}) => {
+    return <div style = {boxStyle(i, w, h, scale)}</div>
+}
+
+const getBoxes = (w, h, scale) => {
+    const boxComponents = []
+    for (var i = 0; i < boxes; i++) {
+        boxComponents.push(<Box w = {w} h = {h} i = {i}/>)
+    }
+    return boxComponents
+}
+
+const getLines = (w, h, scale) => {
+    const lineComponents = []
+    for (var i = 0; i < lineComponents; i++) {
+        lineComponents.push(<Line w = {w} h = {h} i = {i} scale = {scale}/>)
+    }
+    return lineComponents
+}
+
+const BiBoxLine = ({w, h, scale, onClick}) => {
+    return <div onCLick = {onClick}>
+        {getLines(w, h, scale)}
+        {getBoxes(w, h, scale)}
+    </div>
+}
+
+export default BiBoxLine 
